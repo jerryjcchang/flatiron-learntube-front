@@ -40,6 +40,7 @@ class VideosContainer extends React.Component {
         <Tab
           menu={{ secondary: true, pointing: true }}
           panes={this.panes()}
+          id="tab-container"
           // activeIndex={}
         />
       </Container>

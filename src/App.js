@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import VideoModal from './Components/VideoModal'
 import VideosContainer from './Containers/VideosContainer'
+import Navbar from './Components/Navbar'
 
 class App extends React.Component {
 
@@ -35,7 +36,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <h3>Flatiron LearnTube</h3>
+        <Navbar/>
         <VideoModal show={this.state.showModal} handleCloseModal={this.handleCloseModal} video={this.state.selectedVideo}/>
         <VideosContainer videos={this.state.videos} handleVideoCardClick={this.handleVideoCardClick} />
       </div>

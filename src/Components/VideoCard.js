@@ -25,7 +25,7 @@ class VideoCard extends React.Component{
             </Card.Content>
           </Grid.Column>
           <Grid.Column width={3}>
-            <Button color="blue">Add to My List</Button>
+            <Button color="blue">Add To My List</Button>
           </Grid.Column>
         </Grid>
       </Card>
