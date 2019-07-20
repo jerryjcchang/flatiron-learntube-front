@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -42,4 +42,38 @@
 #modal-header {
   background-color: black;
   color: white;
+}
+
+#video-container {
+  position: absolute;
+  /* background-color: white; */
+  width: 50%;
+  left: 1vw;
+}
+
+.ui.cards>.card {
+  display: flex;
+}
+
+#tab-pane {
+  border-width: 0;
+  background-color: whitesmoke;
+}
+
+.ui.column.grid>[class*="eleven wide"].column, .ui.grid>.column.row>[class*="eleven wide"].column, .ui.grid>.row>[class*="eleven wide"].column, .ui.grid>[class*="eleven wide"].column {
+  padding-left: 0;
+}
+
+.header {
+  padding-top: 1vh;
+}
+
+.instructor-div {
+  color: grey
+}
+
+.ui.blue.button {
+  /* margin-top: 2vw; */
+  height: 100%;
+  margin-right: 0vw;
 }

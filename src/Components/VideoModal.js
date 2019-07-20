@@ -1,30 +1,28 @@
 import React from 'react'
-import { Modal, Button } from 'semantic-ui-react'
+import { Modal, Button, Icon } from 'semantic-ui-react'
 import YouTube from 'react-youtube'
 
 class VideoModal extends React.Component {
 
-  state = {
-    show: true,
-  }
-
   render(){
 
-    const {show} = this.state
+    const {show, handleCloseModal, video} = this.props
     return(
       <div>
         <Modal
-          trigger={<Button>Show Modal</Button>}
+          // trigger={<Button>Show Modal</Button>}
+          open={show}
+          onClose={handleCloseModal}
           dimmer
-          closeIcon
+          closeIcon={<Icon name="close" inverted color="grey"/>}
           inverted
           size={"fullscreen"}
         >
-          <Modal.Header id="modal-header">Video Modal</Modal.Header>
+          <Modal.Header id="modal-header">{video ? video.name : null}</Modal.Header>
           <Modal.Content id="modal-body">
             <Modal.Description>
               <YouTube
-                videoId={"Uiwxo0vCWe4"}
+                videoId={video ? video.youtube_id : null}
               />
             </Modal.Description>
           </Modal.Content>
