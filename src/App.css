@@ -31,3 +31,15 @@
     transform: rotate(360deg);
   }
 }
+
+#modal-body {
+  text-align: center;
+  overflow: hidden;
+  padding-right: 2vw;
+  background-color: lightgrey;
+}
+
+#modal-header {
+  background-color: black;
+  color: white;
+}
