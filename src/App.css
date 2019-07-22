@@ -78,7 +78,7 @@
   border-width: 0;
   background-color: whitesmoke;
   overflow-y: scroll;
-  height: 85%;
+  height: 94%;
 }
 
 .ui.column.grid>[class*="eleven wide"].column, .ui.grid>.column.row>[class*="eleven wide"].column, .ui.grid>.row>[class*="eleven wide"].column, .ui.grid>[class*="eleven wide"].column {
@@ -96,10 +96,12 @@
 .ui.blue.button, .ui.red.button {
   /* margin-top: 2vw; */
   height: 100%;
-  margin-right: 0vw;
+  right: 0vw;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   line-height: 3vh;
+  position: relativ;
+  width: 100%;
 }
 
 .ui.red.button {
