@@ -32,6 +32,11 @@
   }
 }
 
+/* #video-modal {
+  top: 0;
+  height: 2vh;
+} */
+
 #modal-body {
   text-align: center;
   overflow: hidden;
@@ -66,7 +71,7 @@
 }
 
 #tab-container {
-  height: 100%
+  height: 90%
 }
 
 #tab-pane {
@@ -109,4 +114,8 @@
 
 #logo {
   width: 8vw;
+}
+
+#avatar {
+  margin-right: 1vw;
 }

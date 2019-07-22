@@ -6,6 +6,7 @@ import VideosContainer from './Containers/VideosContainer'
 import MyVideosContainer from './Containers/MyVideosContainer'
 import Navbar from './Components/Navbar'
 import { Grid, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -15,9 +16,42 @@ class App extends React.Component {
     showModal: false,
     selectedVideo: null,
     loading: true,
+    login: false,
+    user: {}
   }
 
   componentDidMount(){
+    this.fetchVideos()
+    if(window.location.href.includes("code")){
+      this.getToken()
+    }
+  }
+
+  getToken = () => {
+    console.log('fetching token')
+    let url = new URL(window.location.href)
+    let c = url.searchParams.get("code")
+    this.fetchToken(c)
+  }
+
+  fetchToken = (code) => {
+    // debugger
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({
+        string: code
+      })
+    }
+    fetch('http://localhost:3001/token', configObj)
+    .then(r => r.json())
+    .then(d => this.setState({user: d}))
+  }
+
+  fetchVideos = () => {
     fetch('https://learntube-backend.herokuapp.com/api/v1/videos')
     .then(r => r.json())
     .then(data => this.setState({ videos: data, loading: false }))
@@ -61,8 +95,11 @@ class App extends React.Component {
     let url = new URL('https://github.com/login/oauth/authorize')
     let params = { client_id: "8072f40fd7fb862b08a0", state: "my_app"}
     url.search = new URLSearchParams(params)
-    fetch(url)
+    debugger
+    return <Link to={url}/>
   }
+
+
 
   render(){
 
@@ -70,8 +107,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Navbar/>
-        <Button color="yellow" onClick={this.handleLogin}>Login</Button>
+        <Navbar name={this.state.user ? this.state.user.name:null} img_url={this.state.user ? this.state.user.avatar_url:null}/>
         <VideoModal show={showModal} handleCloseModal={this.handleCloseModal} video={selectedVideo}/>
         <VideosContainer
           videos={videos}

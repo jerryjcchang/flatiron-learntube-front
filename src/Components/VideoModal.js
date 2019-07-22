@@ -7,7 +7,7 @@ class VideoModal extends React.Component {
   render(){
 
     const opts = {
-    height: '600',
+    height: '500',
     width: '900',
     playerVars: { // https://developers.google.com/youtube/player_parameters
       autoplay: 1
