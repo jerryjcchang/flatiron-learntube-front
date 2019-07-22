@@ -5,7 +5,7 @@ import VideoModal from './Components/VideoModal'
 import VideosContainer from './Containers/VideosContainer'
 import MyVideosContainer from './Containers/MyVideosContainer'
 import Navbar from './Components/Navbar'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 
 class App extends React.Component {
 
@@ -56,6 +56,14 @@ class App extends React.Component {
     })
   }
 
+  handleLogin = () => {
+    console.log('logging in')
+    let url = new URL('https://github.com/login/oauth/authorize')
+    let params = { client_id: "8072f40fd7fb862b08a0", state: "my_app"}
+    url.search = new URLSearchParams(params)
+    fetch(url)
+  }
+
   render(){
 
     const {loading,videos, myVideos, selectedVideo,showModal} = this.state
@@ -63,6 +71,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar/>
+        <Button color="yellow" onClick={this.handleLogin}>Login</Button>
         <VideoModal show={showModal} handleCloseModal={this.handleCloseModal} video={selectedVideo}/>
         <VideosContainer
           videos={videos}
