@@ -9,7 +9,7 @@ class VideoCard extends React.Component{
       <Card
         fluid
         id="video-card"
-        onClick={() => {handleClick(video)}}
+        onClick={(e) => {handleClick(e, video)}}
       >
         <Grid>
           <Grid.Column width={4}>
@@ -25,7 +25,20 @@ class VideoCard extends React.Component{
             </Card.Content>
           </Grid.Column>
           <Grid.Column width={3}>
-            <Button color="blue">Add To My List</Button>
+            {this.props.buttonType === "add"
+            ?
+            <Button
+              color="blue"
+              onClick={(e) => {this.props.handleAddVideo(e, video)}}>
+            Add To My List
+            </Button>
+            :
+            <Button
+              color="red"
+              onClick={(e) => {this.props.handleRemoveVideo(e, video)}}>
+            Remove
+            </Button>
+            }
           </Grid.Column>
         </Grid>
       </Card>

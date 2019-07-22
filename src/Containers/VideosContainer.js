@@ -19,19 +19,14 @@ class VideosContainer extends React.Component {
           <VideoList
             videos={this.filteredVideos(mod)}
             handleVideoCardClick={this.props.handleVideoCardClick}
+            loading={this.props.loading}
+            handleAddVideo={this.props.handleAddVideo}
+            buttonType={"add"}
           />
         }
       )
     )
   }
-
-  // panes = [
-  //   { menuItem: 'Mod 1', render: () => <VideoList/> },
-  //   { menuItem: 'Mod 2', render: () => <VideoList/> },
-  //   { menuItem: 'Mod 3', render: () => <VideoList/> },
-  //   { menuItem: 'Mod 4', render: () => <VideoList/> },
-  //   { menuItem: 'Mod 5', render: () => <VideoList/> },
-  // ]
 
 
   render(){

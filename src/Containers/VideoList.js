@@ -10,13 +10,16 @@ class VideoList extends React.Component{
         video={video}
         key={video.id}
         handleClick={this.props.handleVideoCardClick}
+        handleAddVideo={this.props.handleAddVideo}
+        handleRemoveVideo={this.props.handleRemoveVideo}
+        buttonType={this.props.buttonType}
       />
     )
   )
 
   render(){
     return(
-      <Tab.Pane id="tab-pane">
+      <Tab.Pane id="tab-pane" loading={this.props.loading}>
         <Card.Group>
           {this.videoCards()}
         </Card.Group>

@@ -47,10 +47,18 @@
 #video-container {
   position: absolute;
   /* background-color: white; */
-  width: 50%;
+  width: 48%;
   left: 1vw;
   overflow: hidden;
   height: 100%;
+}
+
+#my-video-container {
+  position: absolute;
+  width: 48%;
+  right: 1vw;
+  height: 100%;
+  margin-left: 1vw;
 }
 
 .ui.cards>.card {
@@ -80,7 +88,7 @@
   color: grey
 }
 
-.ui.blue.button {
+.ui.blue.button, .ui.red.button {
   /* margin-top: 2vw; */
   height: 100%;
   margin-right: 0vw;
@@ -89,8 +97,16 @@
   line-height: 3vh;
 }
 
+.ui.red.button {
+  background-color: #cc3300;
+}
+
 .ui.inverted.menu {
   border-radius: 0;
   padding-bottom: 1vh;
   align-items: center;
+}
+
+#logo {
+  width: 8vw;
 }
