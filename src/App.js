@@ -70,6 +70,14 @@ class App extends React.Component {
     })
   }
 
+  handleLogout = () => {
+    this.setState({
+      user: {}
+    })
+    localStorage.clear()
+    console.log('logging out')
+  }
+
   fetchVideos = () => {
     fetch('https://learntube-backend.herokuapp.com/api/v1/videos')
     .then(r => r.json())
@@ -126,7 +134,11 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Navbar name={this.state.user ? this.state.user.name:null} img_url={this.state.user ? this.state.user.avatar_url:null}/>
+        <Navbar
+          name={this.state.user ? this.state.user.name:null}
+          img_url={this.state.user ? this.state.user.avatar_url:null}
+          handleLogout={this.handleLogout}
+        />
         <VideoModal show={showModal} handleCloseModal={this.handleCloseModal} video={selectedVideo}/>
         <VideosContainer
           videos={videos}

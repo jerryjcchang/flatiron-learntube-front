@@ -12,7 +12,7 @@ const UserMenu = (props) => {
   )
 
   const options = [
-    { key: 'sign-out', text: 'Sign Out', icon: 'sign out' }
+    { key: 'sign-out', text: 'Sign Out', icon: 'sign out', onClick: props.handleLogout }
   ]
 
   return(

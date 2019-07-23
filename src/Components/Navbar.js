@@ -13,7 +13,7 @@ const Navbar = (props) => (
     />
     </Menu.Item>
 
-    {!localStorage.getItem('token') ?
+    {!props.name ?
       <Menu.Item position="right">
       <Button color="yellow" href="https://github.com/login/oauth/authorize?client_id=8072f40fd7fb862b08a0&state=my_app&&scope=read:user">
         Login
@@ -21,7 +21,7 @@ const Navbar = (props) => (
       </Menu.Item>
     :
     <Menu.Item position="right">
-    <UserMenu name={props.name} imgUrl={props.img_url} />
+    <UserMenu name={props.name} imgUrl={props.img_url} handleLogout={props.handleLogout} />
     </Menu.Item>
     }
 
