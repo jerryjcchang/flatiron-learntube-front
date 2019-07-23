@@ -1,7 +1,9 @@
 import React from 'react'
 import { Menu, Image, Button } from 'semantic-ui-react'
+import UserMenu from './UserMenu'
 
 const Navbar = (props) => (
+
   <Menu inverted>
     <Menu.Item>
     <Image
@@ -19,8 +21,7 @@ const Navbar = (props) => (
       </Menu.Item>
     :
     <Menu.Item position="right">
-    <Image id="avatar" size="mini" circular src={props.img_url}/>
-    {props.name}
+    <UserMenu name={props.name} imgUrl={props.img_url} />
     </Menu.Item>
     }
 
