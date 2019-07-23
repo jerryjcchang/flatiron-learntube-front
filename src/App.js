@@ -8,6 +8,10 @@ import Navbar from './Components/Navbar'
 import { Grid, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
+const FETCHURL = 'http://localhost:3001'
+const TOKEN = FETCHURL+"/token"
+const PROFILE = FETCHURL+"/profile"
+
 class App extends React.Component {
 
   state = {
@@ -21,17 +25,28 @@ class App extends React.Component {
   }
 
   componentDidMount(){
+    let url = new URL(window.location.href)
+    let c = url.searchParams.get("code")
+
     this.fetchVideos()
-    if(window.location.href.includes("code")){
-      this.getToken()
+    if(c && !localStorage.getItem('token')){
+      this.fetchToken(c)
+    } else if(localStorage.getItem('token')){
+      this.fetchUser()
     }
   }
 
-  getToken = () => {
-    console.log('fetching token')
-    let url = new URL(window.location.href)
-    let c = url.searchParams.get("code")
-    this.fetchToken(c)
+  fetchUser = () => {
+    let token = localStorage.getItem('token')
+    let configObj = {
+      method: "POST",
+      headers: {
+        "Authentication": `Bearer ${token}`
+      }
+    }
+    fetch(PROFILE, configObj)
+    .then(r => r.json())
+    .then(d => this.setState({user: d}))
   }
 
   fetchToken = (code) => {
@@ -46,9 +61,13 @@ class App extends React.Component {
         string: code
       })
     }
-    fetch('http://localhost:3001/token', configObj)
+    fetch(TOKEN, configObj)
     .then(r => r.json())
-    .then(d => this.setState({user: d}))
+    .then(data => {
+      console.log(data)
+      this.setState({user: data.user})
+      localStorage.setItem('token', data.token)
+    })
   }
 
   fetchVideos = () => {
