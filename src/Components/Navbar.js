@@ -15,7 +15,7 @@ const Navbar = (props) => (
 
     {!props.name ?
       <Menu.Item position="right">
-      <Button color="yellow" href="https://github.com/login/oauth/authorize?client_id=8072f40fd7fb862b08a0&state=my_app&&scope=read:user">
+      <Button id="login-btn" color="black" href="https://github.com/login/oauth/authorize?client_id=8072f40fd7fb862b08a0&state=my_app&&scope=read:user">
         Login
       </Button>
       </Menu.Item>

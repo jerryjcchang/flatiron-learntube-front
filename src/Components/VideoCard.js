@@ -8,7 +8,7 @@ class VideoCard extends React.Component{
     return(
       <Card
         fluid
-        id="video-card"
+        className="video-card"
         onClick={(e) => {handleClick(e, video)}}
       >
         <Grid>
@@ -28,6 +28,7 @@ class VideoCard extends React.Component{
             {this.props.buttonType === "add"
             ?
             <Button
+              className="add-vid-btn"
               color="blue"
               onClick={(e) => {this.props.handleAddVideo(e, video)}}>
             Add To My List
