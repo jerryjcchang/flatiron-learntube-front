@@ -6,9 +6,9 @@ import VideosContainer from './Containers/VideosContainer'
 import MyVideosContainer from './Containers/MyVideosContainer'
 import Navbar from './Components/Navbar'
 import { Grid, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
-const FETCHURL = 'http://localhost:3001'
+const FETCHURL = 'http://localhost:3001/api/v1'
 const TOKEN = FETCHURL+"/token"
 const PROFILE = FETCHURL+"/profile"
 
@@ -21,7 +21,8 @@ class App extends React.Component {
     selectedVideo: null,
     loading: true,
     login: false,
-    user: {}
+    user: {},
+    redirectHome: false,
   }
 
   componentDidMount(){
@@ -30,7 +31,7 @@ class App extends React.Component {
 
     this.fetchVideos()
     if(c && !localStorage.getItem('token')){
-      this.fetchToken(c)
+      this.login(c)
     } else if(localStorage.getItem('token')){
       this.fetchUser()
     }
@@ -46,10 +47,10 @@ class App extends React.Component {
     }
     fetch(PROFILE, configObj)
     .then(r => r.json())
-    .then(d => this.setState({user: d}))
+    .then(d => this.setState({user: d, redirectHome: true}))
   }
 
-  fetchToken = (code) => {
+  login = (code) => {
     // debugger
     let configObj = {
       method: "POST",
@@ -65,7 +66,7 @@ class App extends React.Component {
     .then(r => r.json())
     .then(data => {
       console.log(data)
-      this.setState({user: data.user})
+      this.setState({user: data.user, redirectHome: true})
       localStorage.setItem('token', data.token)
     })
   }
@@ -130,7 +131,7 @@ class App extends React.Component {
 
   render(){
 
-    const {loading,videos, myVideos, selectedVideo,showModal} = this.state
+    const {loading,videos, myVideos, selectedVideo,showModal, redirectHome} = this.state
 
     return (
       <div className="App">
@@ -152,6 +153,7 @@ class App extends React.Component {
             handleVideoCardClick={this.handleVideoCardClick}
             handleRemoveVideo={this.handleRemoveVideo}
         />
+        {redirectHome ? <Redirect to="/"/> : null}
       </div>
     )
   }
