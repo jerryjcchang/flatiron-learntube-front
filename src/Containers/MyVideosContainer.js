@@ -6,14 +6,14 @@ import { Container, Tab } from 'semantic-ui-react'
 class MyVideosContainer extends React.Component {
 
   state = {
-    form: false
+    form: true
   }
 
   panes = () => (
     [
-      {menuItem: "My Videos",
+      {menuItem: !this.state.form ? "My Videos" : "Add Video",
         render: () =>
-        this.state.form ?
+        !this.state.form ?
         <VideoList
           videos={this.props.myVideos}
           handleVideoCardClick={this.props.handleVideoCardClick}
