@@ -1,13 +1,19 @@
 import React from 'react'
 import VideoList from './VideoList'
+import AddVideoForm from '../Components/AddVideoForm'
 import { Container, Tab } from 'semantic-ui-react'
 
 class MyVideosContainer extends React.Component {
+
+  state = {
+    form: false
+  }
 
   panes = () => (
     [
       {menuItem: "My Videos",
         render: () =>
+        this.state.form ?
         <VideoList
           videos={this.props.myVideos}
           handleVideoCardClick={this.props.handleVideoCardClick}
@@ -15,6 +21,8 @@ class MyVideosContainer extends React.Component {
           handleRemoveVideo={this.props.handleRemoveVideo}
           buttonType={"remove"}
         />
+        :
+        <AddVideoForm />
       }
     ]
   )
