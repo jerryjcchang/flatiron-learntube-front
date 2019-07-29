@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Image, Button } from 'semantic-ui-react'
+import { Menu, Image, Button, Icon } from 'semantic-ui-react'
 import UserMenu from './UserMenu'
 
 const Navbar = (props) => (
@@ -16,7 +16,7 @@ const Navbar = (props) => (
     {!props.name ?
       <Menu.Item position="right">
       <Button id="login-btn" color="black" href="https://github.com/login/oauth/authorize?client_id=8072f40fd7fb862b08a0&state=my_app&&scope=read:user">
-        Login
+        <Icon name="github" /> Login
       </Button>
       </Menu.Item>
     :

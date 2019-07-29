@@ -152,6 +152,7 @@ class App extends React.Component {
             loading={loading}
             handleVideoCardClick={this.handleVideoCardClick}
             handleRemoveVideo={this.handleRemoveVideo}
+            instructor={this.state.user.name}
         />
         {redirectHome ? <Redirect to="/"/> : null}
       </div>

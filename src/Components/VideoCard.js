@@ -35,6 +35,7 @@ class VideoCard extends React.Component{
             </Button>
             :
             <Button
+              className="rmv-vid-btn"
               color="red"
               onClick={(e) => {this.props.handleRemoveVideo(e, video)}}>
             Remove

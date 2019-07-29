@@ -22,7 +22,7 @@ class MyVideosContainer extends React.Component {
           buttonType={"remove"}
         />
         :
-        <AddVideoForm />
+        <AddVideoForm instructor={this.props.instructor} />
       }
     ]
   )
