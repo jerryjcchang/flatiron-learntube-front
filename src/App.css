@@ -143,5 +143,9 @@
 }
 
 #add-cohort-btn {
-  margin-top: 3vh;
+  margin-top: 24px;
+}
+
+#cohort-dropdwn, #cohort-field {
+  width: 23.6vw;
 }

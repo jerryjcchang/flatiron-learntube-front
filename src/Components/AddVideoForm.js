@@ -10,9 +10,12 @@ class AddVideoForm extends React.Component {
       description: "",
       vidId: "",
       length: "",
-      cohort: "",
       mod: "",
-      submitted: false
+      cohort: "",
+      newCohort: "DC-",
+      submitted: false,
+      addCohort: false,
+      disableSelectCohort: false,
     }
 
   modOptions = [
@@ -37,7 +40,14 @@ class AddVideoForm extends React.Component {
   )
 
   handleChange = (e, {name,value}) => {
+    if(name === "vidId"){
+      let parsed = this.parseYoutubeId(value)
+      this.setState({
+        vidId: parsed
+      })
+    } else {
     this.setState({ [name]: value })
+    }
   }
 
   formatInstr = () => {
@@ -46,29 +56,55 @@ class AddVideoForm extends React.Component {
     }
   }
 
+  showCohort = (e) => {
+    e.preventDefault()
+    const { addCohort, disableSelectCohort } = this.state
+    this.setState({
+      addCohort: !addCohort,
+      cohort: "",
+    })
+  }
+
+  parseYoutubeId = (id) => {
+    if(id.includes('&')){
+      return id.split('&')[0].split('=')[1]
+    } else if(id.includes('=')){
+      return id.split('=')[1]
+    } else if(id.includes('/')){
+      return id.split('/')[3]
+    } else{return id}
+  }
+
+  addVideo = () => {
+    this.setState({
+      submitted: true
+    })
+  }
+
   render(){
 
-    const {name, instructor, description, vidId, length, cohort, mod, submitted} = this.state
+    const {name, instructor, description, vidId, length, cohort, mod, submitted, newCohort, addCohort, disableSelectCohort} = this.state
 
     return(
-      <Form>
+      <>
+      <Form id="add-video-form" onSubmit={this.addVideo}>
+        <Form.Group>
+          {!addCohort ? <Form.Select id="cohort-dropdwn" required name="cohort" label="Select Cohort" placeholder="Select Cohort" value={cohort} options={this.cohortOptions()} onChange={this.handleChange} search />
+            : <Form.Input id="cohort-field" required name="newCohort" label="Add Cohort" placeholder="Cohort Name" value={newCohort} onChange={this.handleChange} />}
+          <Button id="add-cohort-btn" content={!addCohort ? "Add" : "Back"} onClick={this.showCohort}/>
+        </Form.Group>
         <Form.Group widths='equal'>
-          <Form.Input required fluid name="name" label="Video Name" placeholder="Video Name" value={name} onChange={this.handleChange} error={!name && submitted ? "Field cannot be left empty": null}/>
-          <Form.Input required fluid name="instructor" label="Instructor" value={this.formatInstr()} onChange={this.handleChange} error={!instructor && submitted ? "Field cannot be left empty": null}/>
+          <Form.Input required fluid name="name" label="Video Name" placeholder="Video Name" value={name} onChange={this.handleChange}/>
+          <Form.Input required fluid name="instructor" label="Instructor" value={this.formatInstr()} onChange={this.handleChange}/>
         </Form.Group>
-        <Form.Group widths="equal">
-          <Form.Input required fluid name="description" label="Video Description" placeholder="Video Description" value={description} onChange={this.handleChange} error={!description && submitted ? "Field cannot be left empty": null}/>
+        <Form.Group widths='equal'>
+          <Form.Input required fluid name="description" label="Video Description" placeholder="Video Description" value={description} onChange={this.handleChange}/>
+          <Form.Input required fluid name="vidId" label="Video ID" placeholder="youtube.com/watch?v=[ID]" value={vidId} onChange={this.handleChange}/>
+          <Form.Select required fluid name="mod" label="Select Mod" placeholder="Select Mod" value={mod} options={this.modOptions} onChange={this.handleChange}/>
         </Form.Group>
-        <Form.Group widths="equal">
-          <Form.Input required fluid name="vidId" label="Video ID" placeholder="youtube.com/watch?v=[ID]" value={vidId} onChange={this.handleChange} error={!vidId && submitted ? "Field cannot be left empty": null}/>
-          <Form.Select required fluid name="mod" label="Select Mod" placeholder="Select Mod" value={mod} options={this.modOptions} onChange={this.handleChange} error={!mod && submitted ? "Field cannot be left empty": null}/>
-        </Form.Group>
-        <Form.Group inline>
-          <Form.Select required fluid name="cohort" label="Select Cohort" placeholder="Select Cohort" value={cohort} options={this.cohortOptions()} onChange={this.handleChange} search error={!cohort && submitted ? "Field cannot be left empty": null}/>
-          <Form.Button id="add-cohort-btn" content="+"/>
-        </Form.Group>
-        <Button content="Add Video" color="red" className="add-vid-btn" />
+        <Form.Button fluid content="Add Video" color="red" className="add-vid-btn" />
       </Form>
+      </>
     )
   }
 }
